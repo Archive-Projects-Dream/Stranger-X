@@ -203,7 +203,7 @@ class DiscordMusicBot extends Client {
                 ", Причина: Файл не имеет run/name/desciption"
             );
           this.commands.set(file.split(".")[0].toLowerCase(), cmd);
-          this.log("Command Loaded: " + file.split(".")[0]);
+          this.log("Команда загружена: " + file.split(".")[0]);
         });
     });
   }

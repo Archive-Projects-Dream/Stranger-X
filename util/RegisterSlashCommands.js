@@ -7,7 +7,7 @@ const path = require("path");
  * @param {string} guild
  */
 module.exports = (client, guild) => {
-  client.log("Registering slash commands for " + guild);
+  client.log("Регистрация слеш команд для " + guild);
 
   let commandsDir = path.join(__dirname, "..", "commands");
 
@@ -27,18 +27,18 @@ module.exports = (client, guild) => {
       let GuildAPI = ClientAPI.guilds(guild);
 
       client.log(
-        "[Slash Command]: [POST] Guild " +
+        "[Слеш Команда]: [Запрос] Сервер " +
           guild +
-          ", Command: " +
+          ", Команда: " +
           dataStuff.name
       );
       try {
         await GuildAPI.commands.post({ data: dataStuff });
       } catch (e) {
         client.log(
-          "[Slash Command]: [POST-FAILED] Guild " +
+          "[Слеш Команда]: [Запрос-Ошибка] Сервер " +
             guild +
-            ", Command: " +
+            ", Команда: " +
             dataStuff.name
         );
         console.log(e);

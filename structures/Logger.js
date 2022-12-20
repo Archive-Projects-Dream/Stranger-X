@@ -15,12 +15,12 @@ class Logger {
       message:
         `${d.getHours()}:${
           d.getMinutes
-        } - ${d.getDate()}:${d.getMonth()}:${d.getFullYear()} | Info: ` + Text,
+        } - ${d.getDate()}:${d.getMonth()}:${d.getFullYear()} | Инфо: ` + Text,
     });
     console.log(
       colors.green(
         `${d.getDate()}:${d.getMonth()}:${d.getFullYear()} - ${d.getHours()}:${d.getMinutes()}`
-      ) + colors.yellow(" | Info: " + Text)
+      ) + colors.yellow(" | Инфо: " + Text)
     );
   }
 }
