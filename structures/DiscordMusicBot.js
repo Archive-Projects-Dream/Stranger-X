@@ -41,7 +41,7 @@ class DiscordMusicBot extends Client {
     }
     if (this.botconfig.Token === "")
       return new TypeError(
-        "The botconfig.js is not filled out. Please make sure nothing is blank, otherwise the bot will not work properly."
+        "Не заполнен файл botconfig.js. Пожалуйста, убедитесь, что в этом файле все заполнено как надо, иначе бот не будет работать."
       );
 
     this.LoadCommands();
@@ -128,7 +128,6 @@ class DiscordMusicBot extends Client {
           port: this.botconfig.Lavalink.port,
           password: this.botconfig.Lavalink.pass,
           secure: this.botconfig.Lavalink.secure,
-
         },
       ]
     );
@@ -162,12 +161,12 @@ class DiscordMusicBot extends Client {
       .on("trackStart", async (player, track) => {
         this.SongsPlayed++;
         let TrackStartedEmbed = new MessageEmbed()
-          .setAuthor({ name: `Сейчас играет ♪`, iconURL: this.botconfig.IconURL })
+          .setAuthor(`Сейчас играет ♪`, this.botconfig.IconURL)
           .setThumbnail(player.queue.current.displayThumbnail())
           .setDescription(`[${track.title}](${track.uri})`)
           .addField("Поставил", `${track.requester}`, true)
           .addField(
-            "Продолжительностью",
+            "Продолжительность",
             `\`${prettyMilliseconds(track.duration, {
               colonNotation: true,
             })}\``,
@@ -177,20 +176,15 @@ class DiscordMusicBot extends Client {
         //.setFooter("Started playing at");
         let NowPlaying = await client.channels.cache
           .get(player.textChannel)
-          .send({ embeds: [TrackStartedEmbed] });
+          .send(TrackStartedEmbed);
         player.setNowplayingMessage(NowPlaying);
       })
       .on("queueEnd", (player) => {
         let QueueEmbed = new MessageEmbed()
-          .setAuthor({
-            name: "Очереди закончилась",
-            iconURL: this.botconfig.IconURL,
-          })
+          .setAuthor("Очередь закончилась", this.botconfig.IconURL)
           .setColor(this.botconfig.EmbedColor)
           .setTimestamp();
-        client.channels.cache
-          .get(player.textChannel)
-          .send({ embeds: [QueueEmbed] });
+        client.channels.cache.get(player.textChannel).send(QueueEmbed);
         if (!this.botconfig["24/7"]) player.destroy();
       });
   }
@@ -204,9 +198,9 @@ class DiscordMusicBot extends Client {
           let cmd = require(CommandsDir + "/" + file);
           if (!cmd.name || !cmd.description || !cmd.run)
             return this.log(
-              "Unable to load Command: " +
+              "Невозможно загрузить команду: " +
                 file.split(".")[0] +
-                ", Reason: File doesn't had run/name/desciption"
+                ", Причина: Файл не имеет run/name/desciption"
             );
           this.commands.set(file.split(".")[0].toLowerCase(), cmd);
           this.log("Command Loaded: " + file.split(".")[0]);
@@ -222,7 +216,7 @@ class DiscordMusicBot extends Client {
         files.forEach((file) => {
           const event = require(EventsDir + "/" + file);
           this.on(file.split(".")[0], event.bind(null, this));
-          this.logger.log("Event Loaded: " + file.split(".")[0]);
+          this.logger.log("Событие загружено: " + file.split(".")[0]);
         });
     });
   }
@@ -245,11 +239,11 @@ class DiscordMusicBot extends Client {
       .setTitle("An error occured")
       .setColor("RED")
       .setDescription(Error)
-      .setFooter({
-        text: "Если вы считаете это ошибкой, пожалуйста, сообщите об этом разработчику бота!",
-      });
+      .setFooter(
+        "Если вы считаете это ошибкой, пожалуйста, сообщите об этом разработчику бота!"
+      );
 
-    Channel.send({ embeds: [embed] });
+    Channel.send(embed);
   }
 
   sendTime(Channel, Error) {
@@ -257,14 +251,14 @@ class DiscordMusicBot extends Client {
       .setColor(this.botconfig.EmbedColor)
       .setDescription(Error);
 
-    Channel.send({ embeds: [embed] });
+    Channel.send(embed);
   }
 
   build() {
     this.login(this.botconfig.Token);
     if (this.botconfig.ExpressServer) {
       this.http.listen(process.env.PORT || this.botconfig.Port, () =>
-        this.log("Web Server has been started")
+        this.log("Веб-сервер запущен")
       );
     }
   }

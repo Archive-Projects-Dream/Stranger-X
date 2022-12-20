@@ -8,7 +8,7 @@ module.exports = {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["leave", "exit", "quit", "dc"],
+  aliases: ["leave", "exit", "quit", "dc", "stop"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -21,14 +21,14 @@ module.exports = {
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel use this command**"
+        "❌ | **Вы должны быть в голосовом канале чтобы использовать эту команду**"
       );
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
-    await client.sendTime(message.channel, ":notes: | **Disconnected!**");
+    await client.sendTime(message.channel, ":notes: | **Отключен!**");
     await message.react("✅");
     player.destroy();
   },
@@ -48,7 +48,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -56,17 +56,17 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          `❌ | **You must be in ${guild.me.voice.channel} to use this command.**`
+          `❌ | **Вы должны быть в ${guild.me.voice.channel} чтобы использовать эту команду.**`
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       player.destroy();
-      client.sendTime(interaction, ":notes: | **Disconnected!**");
+      client.sendTime(interaction, ":notes: | **Отключен!**");
     },
   },
 };

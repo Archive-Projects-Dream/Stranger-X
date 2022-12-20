@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,7 +35,7 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
     player.stop();
     await message.react("✅");
@@ -55,7 +55,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -63,7 +63,7 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
 
       const skipTo = interaction.data.options
@@ -75,16 +75,16 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       console.log(interaction.data);
       if (
         skipTo !== null &&
         (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)
       )
-        return client.sendTime(interaction, "❌ | **Invalid number to skip!**");
+        return client.sendTime(interaction, "❌ | **Неверная цифра для пропуска!**");
       player.stop(skipTo);
-      client.sendTime(interaction, "**Skipped!**");
+      client.sendTime(interaction, "**Пропущено!**");
     },
   },
 };

@@ -3,8 +3,8 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "remove",
-  description: `Remove a song from the queue`,
-  usage: "[number]",
+  description: `Удалить песню из очереди`,
+  usage: "[число]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -24,12 +24,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -37,23 +37,23 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
 
     if (!player.queue || !player.queue.length || player.queue.length === 0)
-      return message.channel.send("There is nothing in the queue to remove");
+      return message.channel.send("Нет ничего в очереди на удаление");
     let rm = new MessageEmbed()
       .setDescription(
-        `✅ **|** Removed track **\`${Number(args[0])}\`** from the queue!`
+        `✅ **|** Трек удален **\`${Number(args[0])}\`** из очереди!`
       )
       .setColor("GREEN");
     if (isNaN(args[0]))
       rm.setDescription(
-        `**Usage - **${client.botconfig.prefix}\`remove [track]\``
+        `**Используйте -**${client.botconfig.prefix}\`remove [трек]\``
       );
     if (args[0] > player.queue.length)
-      rm.setDescription(`The queue has only ${player.queue.length} songs!`);
-    await message.channel.send({ embeds: [rm] });
+      rm.setDescription(`Очередь имеет только ${player.queue.length} songs!`);
+    await message.channel.send(rm);
     player.queue.remove(Number(args[0]) - 1);
   },
 
@@ -61,10 +61,10 @@ module.exports = {
     options: [
       {
         name: "track",
-        value: "[track]",
+        value: "[трек]",
         type: 4,
         required: true,
-        description: "Remove a song from the queue",
+        description: "Удалить песню из очереди",
       },
     ],
     /**
@@ -82,12 +82,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -95,20 +95,20 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
 
       if (!player.queue || !player.queue.length || player.queue.length === 0)
-        return client.sendTime("❌ | **Nothing is playing right now...**");
+        return client.sendTime("❌ | **Прямо сейчас ничего не играет...**");
       let rm = new MessageEmbed()
         .setDescription(
-          `✅ | **Removed track** \`${Number(args[0])}\` from the queue!`
+          `✅ | **Трек удален** \`${Number(args[0])}\` из очереди!`
         )
         .setColor("GREEN");
       if (isNaN(args[0]))
-        rm.setDescription(`**Usage:** \`${GuildDB.prefix}remove [track]\``);
+        rm.setDescription(`**Используйте:** \`${GuildDB.prefix}remove [трек]\``);
       if (args[0] > player.queue.length)
-        rm.setDescription(`The queue has only ${player.queue.length} songs!`);
+        rm.setDescription(`Очередь имеет только ${player.queue.length} песен!`);
       await interaction.send(rm);
       player.queue.remove(Number(args[0]) - 1);
     },

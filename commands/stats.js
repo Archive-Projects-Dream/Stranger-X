@@ -27,24 +27,24 @@ module.exports = {
       }
       const duration = moment
         .duration(message.client.uptime)
-        .format(" D[d], H[h], m[m]");
+        .format(" D[д], H[ч], m[м]");
 
       const embed = new MessageEmbed();
       embed.setColor(client.botconfig.EmbedColor);
       embed.setTitle(`Stats from \`${client.user.username}\``);
       embed.addFields(
         {
-          name: ":ping_pong: Ping",
+          name: ":ping_pong: Пинг",
           value: `┕\`${Math.round(client.ws.ping)}ms\``,
           inline: true,
         },
         {
-          name: ":clock1: Uptime",
+          name: ":clock1: Время работы",
           value: `┕\`${duration}\``,
           inline: true,
         },
         {
-          name: ":file_cabinet: Memory",
+          name: ":file_cabinet: Память",
           value: `┕\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
             2
           )}mb\``,
@@ -54,12 +54,12 @@ module.exports = {
 
       embed.addFields(
         {
-          name: ":homes: Servers",
+          name: ":homes: Серверов",
           value: `┕\`${client.guilds.cache.size}\``,
           inline: true,
         },
         {
-          name: ":busts_in_silhouette: Users",
+          name: ":busts_in_silhouette: Пользователей",
           value: `┕\`${client.users.cache.size}\``,
           inline: true,
         },
@@ -71,7 +71,7 @@ module.exports = {
       );
       embed.addFields(
         {
-          name: ":robot: Version",
+          name: ":robot: Версия",
           value: `┕\`v${require("../package.json").version}\``,
           inline: true,
         },
@@ -87,7 +87,7 @@ module.exports = {
         }
       );
 
-      return message.channel.send({ embeds: [embed] });
+      return message.channel.send(embed);
     });
   },
   SlashCommand: {
@@ -106,24 +106,24 @@ module.exports = {
         }
         const duration = moment
           .duration(client.uptime)
-          .format(" D[d], H[h], m[m]");
+          .format(" D[д], H[ч], m[м]");
 
         const embed = new MessageEmbed();
         embed.setColor(client.botconfig.EmbedColor);
         embed.setTitle(`Stats from \`${client.user.username}\``);
         embed.addFields(
           {
-            name: ":ping_pong: Ping",
+            name: ":ping_pong: Пинг",
             value: `┕\`${Math.round(client.ws.ping)}ms\``,
             inline: true,
           },
           {
-            name: ":clock1: Uptime",
+            name: ":clock1: Время работы",
             value: `┕\`${duration}\``,
             inline: true,
           },
           {
-            name: ":file_cabinet: Memory",
+            name: ":file_cabinet: Память",
             value: `┕\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(
               2
             )}mb\``,
@@ -133,7 +133,7 @@ module.exports = {
 
         embed.addFields(
           {
-            name: ":homes: Servers",
+            name: ":homes: Серверов",
             value: `┕\`${client.guilds.cache.size}\``,
             inline: true,
           },
@@ -150,7 +150,7 @@ module.exports = {
         );
         embed.addFields(
           {
-            name: ":robot: Version",
+            name: ":robot: Версия",
             value: `┕\`v${require("../package.json").version}\``,
             inline: true,
           },

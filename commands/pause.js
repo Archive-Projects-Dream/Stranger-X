@@ -3,7 +3,7 @@ const { TrackUtils } = require("erela.js");
 
 module.exports = {
   name: "pause",
-  description: "Pauses the music",
+  description: "Приостанавливает музыку",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,19 +35,19 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
     if (player.paused)
       return client.sendTime(
         message.channel,
-        "❌ | **Music is already paused!**"
+        "❌ | **Музыка уже поставлена на паузу!**"
       );
     player.pause(true);
     let embed = new MessageEmbed()
-      .setAuthor({ name: `Paused!`, iconURL: client.botconfig.IconURL })
+      .setAuthor(`На паузе!`, client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
-      .setDescription(`Type \`${GuildDB.prefix}resume\` to continue playing!`);
-    await message.channel.send({ embeds: [embed] });
+      .setDescription(`Введите \`${GuildDB.prefix}resume\` чтобы продолжить воспроизведение!`);
+    await message.channel.send(embed);
     await message.react("✅");
   },
 
@@ -66,7 +66,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -74,19 +74,19 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
 
       let player = await client.Manager.get(interaction.guild_id);
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (player.paused)
-        return client.sendTime(interaction, "Music is already paused!");
+        return client.sendTime(interaction, "Музыка уже поставлена на паузу!");
       player.pause(true);
-      client.sendTime(interaction, "**⏸ Paused!**");
+      client.sendTime(interaction, "**⏸ На паузе!**");
     },
   },
 };

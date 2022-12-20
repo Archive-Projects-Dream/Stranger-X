@@ -18,15 +18,15 @@ module.exports = {
    */
   run: async (client, message, args, { GuildDB }) => {
     let Config = new MessageEmbed()
-      .setAuthor({ name: "Server Config", iconURL: client.botconfig.IconURL })
+      .setAuthor("Конфигурация Сервера", client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
-      .addField("Prefix", GuildDB.prefix, true)
-      .addField("DJ Role", GuildDB.DJ ? `<@&${GuildDB.DJ}>` : "Not Set", true)
+      .addField("Префикс", GuildDB.prefix, true)
+      .addField("Роль Диджея", GuildDB.DJ ? `<@&${GuildDB.DJ}>` : "Не установлено", true)
       .setDescription(`
-What would you like to edit?
+Что бы вы хотели отредактировать?
 
-:one: - Server Prefix
-:two: - DJ Role
+:one: - Префикс Сервера
+:two: - Роль Диджея
 `);
 
     let ConfigMessage = await message.channel.send(Config);
@@ -41,7 +41,7 @@ What would you like to edit?
       ConfigMessage.reactions.removeAll();
       client.sendTime(
         message.channel,
-        "❌ | **You took too long to respond. If you want to edit the settings, run the command again!**"
+        "❌ | **Вы слишком долго не отвечали. Если вы хотите изменить настройки, запустите команду снова!**"
       );
       ConfigMessage.delete(Config);
     });
@@ -58,7 +58,7 @@ What would you like to edit?
     if (em._emoji.name === "1️⃣") {
       await client.sendTime(
         message.channel,
-        "What do you want to change the prefix to?"
+        "На что вы хотите изменить префикс?"
       );
       let prefix = await message.channel.awaitMessages(
         (msg) => msg.author.id === message.author.id,
@@ -67,7 +67,7 @@ What would you like to edit?
       if (!prefix.first())
         return client.sendTime(
           message.channel,
-          "You took too long to respond."
+          "Вы слишком долго не отвечали."
         );
       prefix = prefix.first();
       prefix = prefix.content;
@@ -79,12 +79,12 @@ What would you like to edit?
 
       client.sendTime(
         message.channel,
-        `Successfully saved guild prefix as \`${prefix}\``
+        `Успешное сохранение префикса сервера как \`${prefix}\``
       );
     } else {
       await client.sendTime(
         message.channel,
-        "Please mention the role you want `DJ's` to have."
+        "Пожалуйста, укажите, какую роль вы хотите назначить как Диджея."
       );
       let role = await message.channel.awaitMessages(
         (msg) => msg.author.id === message.author.id,
@@ -93,13 +93,13 @@ What would you like to edit?
       if (!role.first())
         return client.sendTime(
           message.channel,
-          "You took too long to respond."
+          "Вы слишком долго не отвечали."
         );
       role = role.first();
       if (!role.mentions.roles.first())
         return client.sendTime(
           message.channel,
-          "Please mention the role that you want for DJ's only."
+          "Пожалуйста, укажите роль, которая вам нужна только для Диджея."
         );
       role = role.mentions.roles.first();
 
@@ -110,7 +110,7 @@ What would you like to edit?
 
       client.sendTime(
         message.channel,
-        "Successfully saved DJ role as <@&" + role.id + ">"
+        "Успешно сохранил роль Диджея как <@&" + role.id + ">"
       );
     }
   },
@@ -119,13 +119,13 @@ What would you like to edit?
     options: [
       {
         name: "prefix",
-        description: "Check the bot's prefix",
+        description: "Посмотреть префикс бота",
         type: 1,
         required: false,
         options: [
           {
             name: "symbol",
-            description: "Set the bot's prefix",
+            description: "Установить префикс бота",
             type: 3,
             required: false,
           },
@@ -133,13 +133,13 @@ What would you like to edit?
       },
       {
         name: "dj",
-        description: "Check the DJ role",
+        description: "Посмотреть роль Диджея",
         type: 1,
         required: false,
         options: [
           {
             name: "role",
-            description: "Set the DJ role",
+            description: "Установить роль Диджея",
             type: 8,
             required: false,
           },
@@ -171,13 +171,13 @@ What would you like to edit?
           });
           client.sendTime(
             interaction,
-            `The prefix has now been set to \`${prefix}\``
+            `Префиксом теперь являеться \`${prefix}\``
           );
         } else {
           //has not prefix
           client.sendTime(
             interaction,
-            `The prefix of this server is \`${GuildDB.prefix}\``
+            `Префикс этого сервера следующий \`${GuildDB.prefix}\``
           );
         }
       } else if (config === "djrole") {
@@ -195,7 +195,7 @@ What would you like to edit?
           });
           client.sendTime(
             interaction,
-            `Successfully changed the DJ role of this server to ${role.name}`
+            `Успешно изменена роль Диджея этого сервера на ${role.name}`
           );
         } else {
           /**
@@ -204,7 +204,7 @@ What would you like to edit?
           let role = interaction.guild.roles.cache.get(GuildDB.DJ);
           client.sendTime(
             interaction,
-            `The DJ role of this server is ${role.name}`
+            `Роль Диджея на этом сервере следующин ${role.name}`
           );
         }
       }

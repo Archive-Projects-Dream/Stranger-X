@@ -1,8 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "invite",
-  description: "To invite me to your server",
+  name: "Пригласите",
+  description: "Чтобы пригласить меня на свой сервер",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -19,12 +19,12 @@ module.exports = {
   run: async (client, message, args, { GuildDB }) => {
     let embed = new MessageEmbed()
       .setAuthor(
-        "Invite " + client.user.tag + " to your server!",
+        "Пригласите " + client.user.tag + " на ваш сервер!",
         client.user.displayAvatarURL()
       )
       .setColor("BLUE")
       .setDescription(
-        `You can invite me by clicking [here](https://discord.com/oauth2/authorize?client_id=${
+        `Вы можете пригласить меня, нажав [here](https://discord.com/oauth2/authorize?client_id=${
           client.botconfig.ClientID
         }&permissions=${
           client.botconfig.Permissions
@@ -45,12 +45,12 @@ module.exports = {
     run: async (client, interaction, args, { GuildDB }) => {
       let embed = new MessageEmbed()
         .setAuthor(
-          "Invite " + client.user.tag + " to your server!",
+          "Пригласите " + client.user.tag + " на ваш сервер!",
           client.user.displayAvatarURL()
         )
         .setColor("BLUE")
         .setDescription(
-          `You can invite me by clicking [here](https://discord.com/oauth2/authorize?client_id=${
+          `Вы можете пригласить меня, нажав [here](https://discord.com/oauth2/authorize?client_id=${
             client.botconfig.ClientID
           }&permissions=${
             client.botconfig.Permissions

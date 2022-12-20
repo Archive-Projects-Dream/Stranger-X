@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "help",
   description: "Информация о командах в боте",
-  usage: "[command]",
+  usage: "[команда]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -33,7 +33,7 @@ module.exports = {
       .setFooter({
         text: `Чтобы получить информацию о каждом типе команды ${
           GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-        }help [Команда] | Хорошего дня!`,
+        }help [команда] | Хорошего дня!`,
       }).setDescription(`${Commands.join("\n")}
   
   Discord Music Bot Version: v${require("../package.json").version}
@@ -41,7 +41,7 @@ module.exports = {
     client.botconfig.SupportServer
   }) | [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot) | [Dashboard](${
       client.botconfig.Website
-    }) | Создан [SudhanPlayz](https://github.com/SudhanPlayz) | Локализатор [Серега](https://github.com/KOCMODECAHTHUK)`);
+    }) | Создан [KOCMODECAHTHUK](https://github.com/KOCMODECAHTHUK) | Локализатор [Серега](https://github.com/KOCMODECAHTHUK)`);
     if (!args[0]) message.channel.send(Embed);
     else {
       let cmd =
@@ -50,40 +50,37 @@ module.exports = {
       if (!cmd)
         return client.sendTime(
           message.channel,
-          `❌ | Unable to find that command.`
+          `❌ | Невозможно найти эту команду.`
         );
 
       let embed = new MessageEmbed()
-        .setAuthor({
-          name: `Command: ${cmd.name}`,
-          iconURL: client.botconfig.IconURL,
-        })
+        .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
         .setDescription(cmd.description)
         .setColor("GREEN")
         //.addField("Name", cmd.name, true)
-        .addField("Aliases", `\`${cmd.aliases.join(", ")}\``, true)
+        .addField("Псевдонимы", `\`${cmd.aliases.join(", ")}\``, true)
         .addField(
-          "Usage",
+          "Аргумент",
           `\`${GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix}${
             cmd.name
           }${cmd.usage ? " " + cmd.usage : ""}\``,
           true
         )
         .addField(
-          "Permissions",
-          "Member: " +
+          "Разрешения",
+          "Пользователь: " +
             cmd.permissions.member.join(", ") +
-            "\nBot: " +
+            "\nБот: " +
             cmd.permissions.channel.join(", "),
           true
         )
-        .setFooter({
-          text: `Prefix - ${
+        .setFooter(
+          `Префикс - ${
             GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-          }`,
-        });
+          }`
+        );
 
-      message.channel.send({ embeds: [embed] });
+      message.channel.send(embed);
     }
   },
 
@@ -114,23 +111,23 @@ module.exports = {
       );
 
       let Embed = new MessageEmbed()
-        .setAuthor({
-          name: `Commands of ${client.user.username}`,
-          iconURL: client.botconfig.IconURL,
-        })
+        .setAuthor(
+          `Команды ${client.user.username}`,
+          client.botconfig.IconURL
+        )
         .setColor(client.botconfig.EmbedColor)
-        .setFooter({
-          text: `To get info of each command type ${
+        .setFooter(
+          `Для доплнительной информацию о каждой команде, введите ${
             GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-          }help [Command] | Have a nice day!`,
-        }).setDescription(`${Commands.join("\n")}
+          }help [команда] | Хорошего дня!`
+        ).setDescription(`${Commands.join("\n")}
   
   Discord Music Bot Version: v${require("../package.json").version}
-  [✨ Support Server](${
+  [✨ Сервер Бота](${
     client.botconfig.SupportServer
   }) | [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot) | [Dashboard](${
         client.botconfig.Website
-      }) | By [SudhanPlayz](https://github.com/SudhanPlayz)`);
+      }) | Создан [KOCMODECAHTHUK](https://github.com/KOCMODECAHTHUK)`);
       if (!args) return interaction.send(Embed);
       else {
         let cmd =
@@ -141,38 +138,35 @@ module.exports = {
         if (!cmd)
           return client.sendTime(
             interaction,
-            `❌ | Unable to find that command.`
+            `❌ | Невозможно найти эту команду.`
           );
 
         let embed = new MessageEmbed()
-          .setAuthor({
-            name: `Command: ${cmd.name}`,
-            iconURL: client.botconfig.IconURL,
-          })
+          .setAuthor(`Команда: ${cmd.name}`, client.botconfig.IconURL)
           .setDescription(cmd.description)
           .setColor("GREEN")
           //.addField("Name", cmd.name, true)
-          .addField("Aliases", cmd.aliases.join(", "), true)
+          .addField("Псевдонимы", cmd.aliases.join(", "), true)
           .addField(
-            "Usage",
+            "Аргумент",
             `\`${GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix}${
               cmd.name
             }\`${cmd.usage ? " " + cmd.usage : ""}`,
             true
           )
           .addField(
-            "Permissions",
-            "Member: " +
+            "Разрешения",
+            "Пользователь: " +
               cmd.permissions.member.join(", ") +
-              "\nBot: " +
+              "\nБот: " +
               cmd.permissions.channel.join(", "),
             true
           )
-          .setFooter({
-            text: `Prefix - ${
+          .setFooter(
+            `Префикс - ${
               GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-            }`,
-          });
+            }`
+          );
 
         interaction.send(embed);
       }

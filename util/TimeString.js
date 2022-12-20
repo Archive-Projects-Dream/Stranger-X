@@ -25,14 +25,14 @@ const DEFAULT_OPTS = {
  */
 
 const UNIT_MAP = {
-  ms: ["ms", "milli", "millisecond", "milliseconds"],
-  s: ["s", "sec", "secs", "second", "seconds"],
-  m: ["m", "min", "mins", "minute", "minutes"],
-  h: ["h", "hr", "hrs", "hour", "hours"],
-  d: ["d", "day", "days"],
-  w: ["w", "week", "weeks"],
-  mth: ["mon", "mth", "mths", "month", "months"],
-  y: ["y", "yr", "yrs", "year", "years"],
+  ms: ["мс", "милли", "миллисекунд", "ms", "milli", "millisecond", "milliseconds"],
+  s: ["с", "сек", "секунд", "s", "sec", "secs", "second", "seconds"],
+  m: ["м", "мин", "минут", "m", "min", "mins", "minute", "minutes"],
+  h: ["ч", "час", "часов", "h", "hr", "hrs", "hour", "hours"],
+  d: ["д", "днень", "дней", "d", "day", "days"],
+  w: ["н", "недель", "неделя", "w", "week", "weeks"],
+  mth: ["мес", "месяцев", "месяц", "mon", "mth", "mths", "month", "months"],
+  y: ["г", "л", "лет", "год", "y", "yr", "yrs", "year", "years"],
 };
 
 /**
@@ -55,7 +55,7 @@ function parseTimestring(string, returnUnit, opts) {
     .match(/[-+]?[0-9.]+[a-z]+/g);
 
   if (groups === null) {
-    throw new Error(`The string [${string}] could not be parsed by timestring`);
+    throw new Error(`Строка [${string}] не может быть разобрана временной шкалой`);
   }
 
   groups.forEach((group) => {
@@ -109,7 +109,7 @@ function getUnitKey(unit) {
     }
   }
 
-  throw new Error(`The unit [${unit}] is not supported by timestring`);
+  throw new Error(`Юнит [${unit}] не поддерживается временной шкалой`);
 }
 
 /**

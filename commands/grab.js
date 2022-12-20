@@ -22,17 +22,17 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!player.playing)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to play something!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы что-то воспроизвести!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -40,52 +40,50 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
     message.author
-      .send({
-        embeds: [
-          new MessageEmbed()
-            .setAuthor({
-              name: `Song saved`,
-              iconURL: client.user.displayAvatarURL({
-                dynamic: true,
-              }),
+      .send(
+        new MessageEmbed()
+          .setAuthor(
+            `Песня сохранена`,
+            client.user.displayAvatarURL({
+              dynamic: true,
             })
-            .setThumbnail(
-              `https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`
-            )
-            .setURL(player.queue.current.uri)
-            .setColor(client.botconfig.EmbedColor)
-            .setTitle(`**${player.queue.current.title}**`)
-            .addField(
-              `⌛ Duration: `,
-              `\`${prettyMilliseconds(player.queue.current.duration, {
-                colonNotation: true,
-              })}\``,
-              true
-            )
-            .addField(`🎵 Author: `, `\`${player.queue.current.author}\``, true)
-            .addField(
-              `▶ Play it:`,
-              `\`${
-                GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-              }play ${player.queue.current.uri}\``
-            )
-            .addField(`🔎 Saved in:`, `<#${message.channel.id}>`)
-            .setFooter({
-              text: `Requested by: ${player.queue.current.requester.tag}`,
-              iconURL: player.queue.current.requester.displayAvatarURL({
-                dynamic: true,
-              }),
-            }),
-        ],
-      })
+          )
+          .setThumbnail(
+            `https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`
+          )
+          .setURL(player.queue.current.uri)
+          .setColor(client.botconfig.EmbedColor)
+          .setTitle(`**${player.queue.current.title}**`)
+          .addField(
+            `⌛ Продолжительность: `,
+            `\`${prettyMilliseconds(player.queue.current.duration, {
+              colonNotation: true,
+            })}\``,
+            true
+          )
+          .addField(`🎵 Автор: `, `\`${player.queue.current.author}\``, true)
+          .addField(
+            `▶ Играет:`,
+            `\`${
+              GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
+            }play ${player.queue.current.uri}\``
+          )
+          .addField(`🔎 Сохранено в:`, `<#${message.channel.id}>`)
+          .setFooter(
+            `Поставил: ${player.queue.current.requester.tag}`,
+            player.queue.current.requester.displayAvatarURL({
+              dynamic: true,
+            })
+          )
+      )
       .catch((e) => {
-        return message.channel.send("**:x: Your DMs are disabled**");
+        return message.channel.send("**❌ У вас отключены ЛС, я не могу вам написать**");
       });
 
-    client.sendTime(message.channel, "✅ | **Check your DMs!**");
+    client.sendTime(message.channel, "✅ | **Проверьте ЛС!**");
   },
   SlashCommand: {
     /**
@@ -103,17 +101,17 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!player.playing)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -121,14 +119,11 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
       try {
         let embed = new MessageEmbed()
-          .setAuthor({
-            name: `Song saved: `,
-            iconURL: `client.user.displayAvatarURL()`,
-          })
+          .setAuthor(`Песня сохранена: `, client.user.displayAvatarURL())
           .setThumbnail(
             `https://img.youtube.com/vi/${player.queue.current.identifier}/mqdefault.jpg`
           )
@@ -137,32 +132,32 @@ module.exports = {
           .setTimestamp()
           .setTitle(`**${player.queue.current.title}**`)
           .addField(
-            `⌛ Duration: `,
+            `⌛ Продолжительность: `,
             `\`${prettyMilliseconds(player.queue.current.duration, {
               colonNotation: true,
             })}\``,
             true
           )
-          .addField(`🎵 Author: `, `\`${player.queue.current.author}\``, true)
+          .addField(`🎵 Автор: `, `\`${player.queue.current.author}\``, true)
           .addField(
-            `▶ Play it:`,
+            `▶ Играет:`,
             `\`${
               GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
             }play ${player.queue.current.uri}\``
           )
-          .addField(`🔎 Saved in:`, `<#${interaction.channel_id}>`)
-          .setFooter({
-            text: `Requested by: ${player.queue.current.requester.tag}`,
-            iconURL: player.queue.current.requester.displayAvatarURL({
+          .addField(`🔎 Сохранено в:`, `<#${interaction.channel_id}>`)
+          .setFooter(
+            `Поставил: ${player.queue.current.requester.tag}`,
+            player.queue.current.requester.displayAvatarURL({
               dynamic: true,
-            }),
-          });
-        user.send({ embeds: [embed] });
+            })
+          );
+        user.send(embed);
       } catch (e) {
-        return client.sendTime(interaction, "**:x: Your DMs are disabled**");
+        return client.sendTime(interaction, "**❌ У вас отключены ЛС, я не могу вам написать**");
       }
 
-      client.sendTime(interaction, "✅ | **Check your DMs!**");
+      client.sendTime(interaction, "✅ | **Проверьте ЛС!**");
     },
   },
 };

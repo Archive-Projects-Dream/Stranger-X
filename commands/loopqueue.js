@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,15 +35,15 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
 
     if (player.queueRepeat) {
       player.setQueueRepeat(false);
-      client.sendTime(message.channel, `:repeat: Queue Loop \`disabled\``);
+      client.sendTime(message.channel, `:repeat: Повтор \`Выключен\``);
     } else {
       player.setQueueRepeat(true);
-      client.sendTime(message.channel, `:repeat: Queue Loop \`enabled\``);
+      client.sendTime(message.channel, `:repeat: Повтор \`Включен\``);
     }
   },
   SlashCommand: {
@@ -63,28 +63,20 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
-        );
-      if (
-        guild.me.voice.channel &&
-        !guild.me.voice.channel.equals(voiceChannel)
-      )
-        return client.sendTime(
-          interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
-        );
-
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
+          );
+  
       if (player.queueRepeat) {
         player.setQueueRepeat(false);
-        client.sendTime(interaction, `:repeat: **Queue Loop** \`disabled\``);
+        client.sendTime(interaction, `:repeat: **Повтор** \`Выключен\``);
       } else {
         player.setQueueRepeat(true);
-        client.sendTime(interaction, `:repeat: **Queue Loop** \`enabled\``);
+        client.sendTime(interaction, `:repeat: **Повтор** \`Включен\``);
       }
       console.log(interaction.data);
     },

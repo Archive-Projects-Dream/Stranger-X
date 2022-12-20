@@ -3,7 +3,7 @@ const prettyMilliseconds = require("pretty-ms");
 
 module.exports = {
   name: "nowplaying",
-  description: "See what song is currently playing",
+  description: "See what song is Сейчас играет",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -22,20 +22,17 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
 
     let song = player.queue.current;
     let QueueEmbed = new MessageEmbed()
-      .setAuthor({
-        name: "Currently playing",
-        iconURL: client.botconfig.IconURL,
-      })
+      .setAuthor("Сейчас играет", client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
       .setDescription(`[${song.title}](${song.uri})`)
-      .addField("Requested by", `${song.requester}`, true)
+      .addField("Поставил", `${song.requester}`, true)
       .addField(
-        "Duration",
+        "Продолжительность",
         `${
           client.ProgressBar(player.position, player.queue.current.duration, 15)
             .Bar
@@ -46,7 +43,7 @@ module.exports = {
         })}\``
       )
       .setThumbnail(player.queue.current.displayThumbnail());
-    return message.channel.send({ embeds: [QueueEmbed] });
+    return message.channel.send(QueueEmbed);
   },
 
   SlashCommand: {
@@ -62,20 +59,17 @@ module.exports = {
       if (!player.queue.current)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
 
       let song = player.queue.current;
       let QueueEmbed = new MessageEmbed()
-        .setAuthor({
-          name: "Currently playing",
-          iconURL: client.botconfig.IconURL,
-        })
+        .setAuthor("Сейчас играет", client.botconfig.IconURL)
         .setColor(client.botconfig.EmbedColor)
         .setDescription(`[${song.title}](${song.uri})`)
-        .addField("Requested by", `${song.requester}`, true)
+        .addField("Поставил", `${song.requester}`, true)
         .addField(
-          "Duration",
+          "Продолжительность",
           `${
             client.ProgressBar(
               player.position,

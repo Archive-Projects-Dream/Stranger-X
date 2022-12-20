@@ -59,10 +59,13 @@
   "devDependencies": {
     "husky": "7.0.4",
     "lint-staged": "11.2.2",
-    "node": "^16.17.0",
     "prettier": "2.4.1"
   },
   "lint-staged": {
     "*.{js,json,md}": "prettier --write"
+  },
+  "volta": {
+    "node": "12.22.12",
+    "yarn": "3.3.0"
   }
 }

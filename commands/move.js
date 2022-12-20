@@ -22,22 +22,22 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!args[0] || !args[1])
-      return client.sendTime(message.channel, "❌ | **Invalid arguments.**");
+      return client.sendTime(message.channel, "❌ | **Неправильный аргумент.**");
 
     // Check if (args[0] - 1) is a valid index
     let trackNum = parseInt(args[0] - 1);
     if (trackNum < 1 || trackNum > player.queue.length - 1) {
-      return client.sendTime(message.channel, "❌ | **Invalid track number.**");
+      return client.sendTime(message.channel, "❌ | **Неверный номер трека.**");
     }
 
     let dest = parseInt(args[1] - 1);
     if (dest < 1 || dest > player.queue.length - 1) {
       return client.sendTime(
         message.channel,
-        "❌ | **Invalid track destination.**"
+        "❌ | **Неверное место назначения.**"
       );
     }
 
@@ -49,7 +49,7 @@ module.exports = {
       message.channel,
       "✅ | **" +
         track.title +
-        "** has been moved to position " +
+        "** была перемещена в позицию " +
         (dest + 1) +
         "."
     );
@@ -62,14 +62,14 @@ module.exports = {
         value: "track",
         type: 4,
         required: true,
-        description: "Track to move.",
+        description: "Трек для перемещения.",
       },
       {
         name: "position",
         value: "track2",
         type: 4,
         required: true,
-        description: "Moves selected track to the specified position.",
+        description: "Перемещает выбранную дорожку в указанную позицию.",
       },
     ],
     /**
@@ -87,22 +87,22 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!args[0].value || !args[1].value)
-        return client.sendTime(interaction, "❌ | **Invalid track number.**");
+        return client.sendTime(interaction, "❌ | **Неверный номер трека.**");
 
       // Check if (args[0] - 1) is a valid index
       let trackNum = parseInt(args[0].value - 1);
       if (trackNum < 1 || trackNum > player.queue.length - 1) {
-        return client.sendTime(interaction, "❌ | **Invalid track number.**");
+        return client.sendTime(interaction, "❌ | **Неверный номер трека.**");
       }
 
       let dest = parseInt(args[1].value - 1);
       if (dest < 1 || dest > player.queue.length - 1) {
         return client.sendTime(
           interaction,
-          "❌ | **Invalid track destination.**"
+          "❌ | **Неверное место назначения.**"
         );
       }
 
@@ -114,7 +114,7 @@ module.exports = {
         interaction,
         "✅ | **" +
           track.title +
-          "** has been moved to position " +
+          "** была перемещена в позицию " +
           (dest + 1) +
           "."
       );

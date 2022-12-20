@@ -22,12 +22,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -35,15 +35,15 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
 
     if (player.trackRepeat) {
       player.setTrackRepeat(false);
-      client.sendTime(message.channel, `🔂  \`Disabled\``);
+      client.sendTime(message.channel, `🔂  \`Выключен\``);
     } else {
       player.setTrackRepeat(true);
-      client.sendTime(message.channel, `🔂 \`Enabled\``);
+      client.sendTime(message.channel, `🔂 \`Включен\``);
     }
   },
   SlashCommand: {
@@ -62,12 +62,12 @@ module.exports = {
       if (!player)
         return client.sendTime(
           interaction,
-          "❌ | **Nothing is playing right now...**"
+          "❌ | **Прямо сейчас ничего не играет...**"
         );
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | You must be in a voice channel to use this command."
+          "❌ | Вы должны быть в голосовом канале, чтобы использовать эту команду."
         );
       if (
         guild.me.voice.channel &&
@@ -75,15 +75,15 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **You must be in the same voice channel as me to use this command!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
 
       if (player.trackRepeat) {
         player.setTrackRepeat(false);
-        client.sendTime(interaction, `🔂 \`Disabled\``);
+        client.sendTime(interaction, `🔂 \`Выключен\``);
       } else {
         player.setTrackRepeat(true);
-        client.sendTime(interaction, `🔂 \`Enabled\``);
+        client.sendTime(interaction, `🔂 \`Включен\``);
       }
       console.log(interaction.data);
     },

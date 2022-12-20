@@ -4,7 +4,7 @@ const { TrackUtils, Player } = require("erela.js");
 module.exports = {
   name: "skipto",
   description: `Skip to a song in the queue`,
-  usage: "<number>",
+  usage: "<число>",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -28,12 +28,12 @@ module.exports = {
     if (!player)
       return client.sendTime(
         message.channel,
-        "❌ | **Nothing is playing right now...**"
+        "❌ | **Прямо сейчас ничего не играет...**"
       );
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **You must be in a voice channel to use this command!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -41,20 +41,20 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **You must be in the same voice channel as me to use this command!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
 
     try {
       if (!args[0])
         return client.sendTime(
           message.channel,
-          `**Usage**: \`${GuildDB.prefix}skipto [number]\``
+          `**Используйте**: \`${GuildDB.prefix}skipto [число]\``
         );
       //if the wished track is bigger then the Queue Size
       if (Number(args[0]) > player.queue.size)
         return client.sendTime(
           message.channel,
-          `❌ | That song is not in the queue! Please try again!`
+          `❌ | Этой песни нет в очереди! Пожалуйста, попробуйте еще раз!`
         );
       //remove all tracks to the jumped song
       player.queue.remove(0, Number(args[0]) - 1);
@@ -63,21 +63,21 @@ module.exports = {
       //Send Success Message
       return client.sendTime(
         message.channel,
-        `⏭ Skipped \`${Number(args[0] - 1)}\` songs`
+        `⏭ Пропущено \`${Number(args[0] - 1)}\` песен`
       );
     } catch (e) {
       console.log(String(e.stack).bgRed);
-      client.sendError(message.channel, "Something went wrong.");
+      client.sendError(message.channel, "Что-то пошло не так.");
     }
   },
   SlashCommand: {
     options: [
       {
         name: "position",
-        value: "[position]",
+        value: "[позиция]",
         type: 4,
         required: true,
-        description: "Skips to a specific song in the queue",
+        description: "Переход к определенной песне в очереди",
       },
     ],
     /**
@@ -95,7 +95,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **You must be in a voice channel to use this command.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -103,13 +103,13 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          `:x: | **You must be in the same voice channel as me to use this command!**`
+          `❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!`
         );
       let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
       if (!CheckNode || !CheckNode.connected) {
         return client.sendTime(
           interaction,
-          "❌ | **Lavalink node not connected**"
+          "❌ | **Узел Lavalink не подключен, сообщите об этом Cepeгa#1757**"
         );
       }
 
@@ -124,7 +124,7 @@ module.exports = {
         if (!interaction.data.options)
           return client.sendTime(
             interaction,
-            `**Usage**: \`${GuildDB.prefix}skipto <number>\``
+            `**Используйте**: \`${GuildDB.prefix}skipto <число>\``
           );
         let skipTo = interaction.data.options[0].value;
         //if the wished track is bigger then the Queue Size
@@ -134,18 +134,18 @@ module.exports = {
         )
           return client.sendTime(
             interaction,
-            `❌ | That song is not in the queue! Please try again!`
+            `❌ | Этой песни нет в очереди! Пожалуйста, попробуйте еще раз!`
           );
 
         player.stop(skipTo);
         //Send Success Message
         return client.sendTime(
           interaction,
-          `⏭ Skipped \`${Number(skipTo)}\` songs`
+          `⏭ Пропущено \`${Number(skipTo)}\` песен`
         );
       } catch (e) {
         console.log(String(e.stack).bgRed);
-        client.sendError(interaction, "Something went wrong.");
+        client.sendError(interaction, "Что-то пошло не так.");
       }
     },
   },

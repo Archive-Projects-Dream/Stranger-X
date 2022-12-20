@@ -5,7 +5,7 @@ const prettyMilliseconds = require("pretty-ms");
 module.exports = {
   name: "play",
   description: "Запускает ваши любимые песни",
-  usage: "[song]",
+  usage: "[трек]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
@@ -22,7 +22,7 @@ module.exports = {
     if (!message.member.voice.channel)
       return client.sendTime(
         message.channel,
-        "❌ | **Вы должны быть на голосовом канале, чтобы что-то воспроизвести!**"
+        "❌ | **Вы должны быть в голосовом канале, чтобы что-то воспроизвести!**"
       );
     if (
       message.guild.me.voice.channel &&
@@ -30,13 +30,13 @@ module.exports = {
     )
       return client.sendTime(
         message.channel,
-        ":x: | **Вы должны быть на том же голосовом канале, что и я, чтобы использовать эту команду!**"
+        "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
       );
     let SearchString = args.join(" ");
     if (!SearchString)
       return client.sendTime(
         message.channel,
-        `**Использование -**\`${GuildDB.prefix}play [song]\``
+        `**Используйте -**\`${GuildDB.prefix}play [трек]\``
       );
     let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
     let Searching = await message.channel.send(":mag_right: Поиск...");
@@ -83,16 +83,16 @@ module.exports = {
             player.queue.totalSize === Searched.tracks.length
           )
             player.play();
-          SongAddedEmbed.setAuthor({
-            name: `Плейлист добавлен в очередь`,
-            iconURL: message.author.displayAvatarURL(),
-          });
+          SongAddedEmbed.setAuthor(
+            `Плейлист добавлен в очередь`,
+            message.author.displayAvatarURL()
+          );
           SongAddedEmbed.addField(
             "Поставленно в очередь",
             `\`${Searched.tracks.length}\` песен`,
             false
           );
-          //SongAddedEmbed.addField("Playlist duration", `\`${prettyMilliseconds(Searched.tracks, { colonNotation: true })}\``, false)
+          //SongAddedEmbed.addField("Продолжительность плейлиста", `\`${prettyMilliseconds(Searched.tracks, { colonNotation: true })}\``, false)
           Searching.edit(SongAddedEmbed);
         } else if (Searched.loadType.startsWith("TRACK")) {
           player.queue.add(
@@ -100,10 +100,7 @@ module.exports = {
           );
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor({
-            name: `Добавлено в очередь`,
-            iconURL: client.botconfig.IconURL,
-          });
+          SongAddedEmbed.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
           SongAddedEmbed.setDescription(
             `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
           );
@@ -112,7 +109,7 @@ module.exports = {
             Searched.tracks[0].info.author,
             true
           );
-          //SongAddedEmbed.addField("Duration", `\`${prettyMilliseconds(Searched.tracks[0].length, { colonNotation: true })}\``, true);
+          //SongAddedEmbed.addField("Продолжительность", `\`${prettyMilliseconds(Searched.tracks[0].length, { colonNotation: true })}\``, true);
           if (player.queue.totalSize > 1)
             SongAddedEmbed.addField(
               "Позиция в очереди",
@@ -123,7 +120,7 @@ module.exports = {
         } else {
           return client.sendTime(
             message.channel,
-            "**Не найдено совпадений для - **" + SearchString
+            "**Не найдено совпадений - **" + SearchString
           );
         }
       } else {
@@ -137,7 +134,7 @@ module.exports = {
         if (Searched.loadType === "NO_MATCHES")
           return client.sendTime(
             message.channel,
-            "**Не найдено совпадений для - **" + SearchString
+            "**Не найдено совпадений - **" + SearchString
           );
         else if (Searched.loadType == "PLAYLIST_LOADED") {
           player.queue.add(Searched.tracks);
@@ -147,10 +144,10 @@ module.exports = {
             player.queue.totalSize === Searched.tracks.length
           )
             player.play();
-          SongAddedEmbed.setAuthor({
-            name: `Плейлист добавлен в очередь`,
-            iconURL: client.botconfig.IconURL,
-          });
+          SongAddedEmbed.setAuthor(
+            `Плейлист добавлен в очередь`,
+            client.botconfig.IconURL
+          );
           // SongAddedEmbed.setThumbnail(Searched.tracks[0].displayThumbnail());
           SongAddedEmbed.setDescription(
             `[${Searched.playlist.name}](${SearchString})`
@@ -161,7 +158,7 @@ module.exports = {
             false
           );
           SongAddedEmbed.addField(
-            "Продолжительность воспроизведения",
+            "Продолжительность плейлиста",
             `\`${prettyMilliseconds(Searched.playlist.duration, {
               colonNotation: true,
             })}\``,
@@ -172,10 +169,7 @@ module.exports = {
           player.queue.add(Searched.tracks[0]);
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor({
-            name: `Добавлено в очередь`,
-            iconURL: client.botconfig.IconURL,
-          });
+          SongAddedEmbed.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
 
           // SongAddedEmbed.setThumbnail(Searched.tracks[0].displayThumbnail());
           SongAddedEmbed.setDescription(
@@ -202,7 +196,7 @@ module.exports = {
       console.log(e);
       return client.sendTime(
         message.channel,
-        "**Не найдено совпадений для - **" + SearchString
+        "**Не найдено совпадений - **" + SearchString
       );
     }
   },
@@ -211,10 +205,10 @@ module.exports = {
     options: [
       {
         name: "song",
-        value: "song",
+        value: "трек",
         type: 3,
         required: true,
-        description: "Play music in the voice channel",
+        description: "Запускает ваши любимые песни",
       },
     ],
     /**
@@ -232,7 +226,7 @@ module.exports = {
       if (!member.voice.channel)
         return client.sendTime(
           interaction,
-          "❌ | **Вы должны быть подключены к голосовому каналу, чтобы использовать эту команду.**"
+          "❌ | **Вы должны быть в голосовом канале, чтобы использовать эту команду.**"
         );
       if (
         guild.me.voice.channel &&
@@ -240,7 +234,7 @@ module.exports = {
       )
         return client.sendTime(
           interaction,
-          ":x: | **Вы должны быть на том же голосовом канале, что и я, чтобы использовать эту команду!**"
+          "❌ | **Вы должны быть в том же голосовом канале, что и я, чтобы использовать эту команду!"
         );
       let CheckNode = client.Manager.nodes.get(client.botconfig.Lavalink.id);
       if (!CheckNode || !CheckNode.connected) {
@@ -285,10 +279,10 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length)
               player.play();
             let SongAddedEmbed = new MessageEmbed();
-            SongAddedEmbed.setAuthor({
-              name: `Добавлено в очередь`,
-              iconURL: client.botconfig.IconURL,
-            });
+            SongAddedEmbed.setAuthor(
+              `Добавлено в очередь`,
+              client.botconfig.IconURL
+            );
             SongAddedEmbed.setColor(client.botconfig.EmbedColor);
             SongAddedEmbed.setDescription(
               `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
@@ -311,10 +305,7 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length)
               player.play();
             let SongAdded = new MessageEmbed();
-            SongAdded.setAuthor({
-              name: `Добавлено в очередь`,
-              iconURL: client.botconfig.IconURL,
-            });
+            SongAdded.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
             SongAdded.setColor(client.botconfig.EmbedColor);
             SongAdded.setDescription(
               `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
@@ -340,10 +331,10 @@ module.exports = {
             )
               player.play();
             let Playlist = new MessageEmbed();
-            Playlist.setAuthor({
-              name: `Плейлист добавлен в очередь`,
-              iconURL: client.botconfig.IconURL,
-            });
+            Playlist.setAuthor(
+              `Плейлист добавлен в очередь`,
+              client.botconfig.IconURL
+            );
             Playlist.setDescription(
               `[${Searched.playlistInfo.name}](${interaction.data.options[0].value})`
             );
@@ -361,7 +352,7 @@ module.exports = {
             if (!player.queue.current) player.destroy();
             return client.sendError(
               interaction,
-              `:x: | **При поиске произошла ошибка**`
+              `❌ | **При поиске произошла ошибка**`
             );
           }
         } catch (err) {
@@ -382,10 +373,10 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length)
               player.play();
             let SongAddedEmbed = new MessageEmbed();
-            SongAddedEmbed.setAuthor({
-              name: `Добавлено в очередь`,
-              iconURL: client.botconfig.IconURL,
-            });
+            SongAddedEmbed.setAuthor(
+              `Добавлено в очередь`,
+              client.botconfig.IconURL
+            );
             //SongAddedEmbed.setThumbnail(res.tracks[0].displayThumbnail());
             SongAddedEmbed.setColor(client.botconfig.EmbedColor);
             SongAddedEmbed.setDescription(
@@ -411,21 +402,21 @@ module.exports = {
             player.queue.add(res.tracks);
             await player.play();
             let SongAdded = new MessageEmbed();
-            SongAdded.setAuthor({
-              name: `Список воспроизведения добавлен в очередь`,
-              iconURL: client.botconfig.IconURL,
-            });
+            SongAdded.setAuthor(
+              `Плейлист добавлен в очередь`,
+              client.botconfig.IconURL
+            );
             //SongAdded.setThumbnail(res.tracks[0].displayThumbnail());
             SongAdded.setDescription(
               `[${res.playlist.name}](${interaction.data.options[0].value})`
             );
             SongAdded.addField(
-              "Поставленный в очередь",
+              "Поставленно в очередь",
               `\`${res.tracks.length}\` песен`,
               false
             );
             SongAdded.addField(
-              "Продолжительность воспроизведения",
+              "Продолжительность плейлиста",
               `\`${prettyMilliseconds(res.playlist.duration, {
                 colonNotation: true,
               })}\``,
@@ -438,10 +429,10 @@ module.exports = {
 
             if (!player.playing && !player.paused && !player.queue.length) {
               let SongAddedEmbed = new MessageEmbed();
-              SongAddedEmbed.setAuthor({
-                name: `Добавлено в очередь`,
-                iconURL: client.botconfig.IconURL,
-              });
+              SongAddedEmbed.setAuthor(
+                `Добавлено в очередь`,
+                client.botconfig.IconURL
+              );
               SongAddedEmbed.setThumbnail(track.displayThumbnail());
               SongAddedEmbed.setColor(client.botconfig.EmbedColor);
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
@@ -463,10 +454,10 @@ module.exports = {
               return interaction.send(SongAddedEmbed);
             } else {
               let SongAddedEmbed = new MessageEmbed();
-              SongAddedEmbed.setAuthor({
-                name: `Добавлено в очередь`,
-                iconURL: client.botconfig.IconURL,
-              });
+              SongAddedEmbed.setAuthor(
+                `Добавлено в очередь`,
+                client.botconfig.IconURL
+              );
               SongAddedEmbed.setThumbnail(track.displayThumbnail());
               SongAddedEmbed.setColor(client.botconfig.EmbedColor);
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
