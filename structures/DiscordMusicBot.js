@@ -166,7 +166,7 @@ class DiscordMusicBot extends Client {
           .setDescription(`[${track.title}](${track.uri})`)
           .addField("Поставил", `${track.requester}`, true)
           .addField(
-            "Продолжительность",
+            "Продолжительностью",
             `\`${prettyMilliseconds(track.duration, {
               colonNotation: true,
             })}\``,

@@ -58,7 +58,7 @@ module.exports = {
           .setColor(client.botconfig.EmbedColor)
           .setTitle(`**${player.queue.current.title}**`)
           .addField(
-            `⌛ Продолжительность: `,
+            `⌛ Продолжительностью: `,
             `\`${prettyMilliseconds(player.queue.current.duration, {
               colonNotation: true,
             })}\``,
@@ -80,7 +80,9 @@ module.exports = {
           )
       )
       .catch((e) => {
-        return message.channel.send("**❌ У вас отключены ЛС, я не могу вам написать**");
+        return message.channel.send(
+          "**❌ У вас отключены ЛС, я не могу вам написать**"
+        );
       });
 
     client.sendTime(message.channel, "✅ | **Проверьте ЛС!**");
@@ -132,7 +134,7 @@ module.exports = {
           .setTimestamp()
           .setTitle(`**${player.queue.current.title}**`)
           .addField(
-            `⌛ Продолжительность: `,
+            `⌛ Продолжительностью: `,
             `\`${prettyMilliseconds(player.queue.current.duration, {
               colonNotation: true,
             })}\``,
@@ -154,7 +156,10 @@ module.exports = {
           );
         user.send(embed);
       } catch (e) {
-        return client.sendTime(interaction, "**❌ У вас отключены ЛС, я не могу вам написать**");
+        return client.sendTime(
+          interaction,
+          "**❌ У вас отключены ЛС, я не могу вам написать**"
+        );
       }
 
       client.sendTime(interaction, "✅ | **Проверьте ЛС!**");

@@ -2,14 +2,14 @@ const { MessageEmbed } = require("discord.js");
 const { TrackUtils } = require("erela.js");
 
 module.exports = {
-  name: "skip",
+  name: "пропустить",
   description: "Skip the current song",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["s", "next"],
+  aliases: ["следующая", "с", "пропуск", "skip", "s", "next"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -82,7 +82,10 @@ module.exports = {
         skipTo !== null &&
         (isNaN(skipTo) || skipTo < 1 || skipTo > player.queue.length)
       )
-        return client.sendTime(interaction, "❌ | **Неверная цифра для пропуска!**");
+        return client.sendTime(
+          interaction,
+          "❌ | **Неверная цифра для пропуска!**"
+        );
       player.stop(skipTo);
       client.sendTime(interaction, "**Пропущено!**");
     },

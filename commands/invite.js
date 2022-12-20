@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "Пригласите",
+  name: "Пригласить",
   description: "Чтобы пригласить меня на свой сервер",
   usage: "",
   permissions: {

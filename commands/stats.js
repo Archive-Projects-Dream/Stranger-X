@@ -5,7 +5,7 @@ const moment = require("moment");
 
 module.exports = {
   name: "stats",
-  description: "Get information about the bot",
+  description: "Дает информацию о боте",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
@@ -31,7 +31,7 @@ module.exports = {
 
       const embed = new MessageEmbed();
       embed.setColor(client.botconfig.EmbedColor);
-      embed.setTitle(`Stats from \`${client.user.username}\``);
+      embed.setTitle(`Статистика от \`${client.user.username}\``);
       embed.addFields(
         {
           name: ":ping_pong: Пинг",

@@ -74,7 +74,7 @@ module.exports = {
           (s) =>
             `\`${s.index + 1}.\` [${s.title}](${
               s.uri
-            }) \nПродолжительность: \`${prettyMilliseconds(s.duration, {
+            }) \nПродолжительностью: \`${prettyMilliseconds(s.duration, {
               colonNotation: true,
             })}\``
         );
@@ -137,7 +137,7 @@ module.exports = {
       SongAddedEmbed.setDescription(`[${Song.title}](${Song.uri})`);
       SongAddedEmbed.addField("Автор", `${Song.author}`, true);
       SongAddedEmbed.addField(
-        "Продолжительность",
+        "Продолжительностью",
         `\`${prettyMilliseconds(player.queue.current.duration, {
           colonNotation: true,
         })}\``,
@@ -160,7 +160,8 @@ module.exports = {
         value: "трек",
         type: 3,
         required: true,
-        description: "Введите название песни или url, по которому вы хотите выполнить поиск",
+        description:
+          "Введите название песни или url, по которому вы хотите выполнить поиск",
       },
     ],
     /**
@@ -330,9 +331,7 @@ module.exports = {
               });
             } catch (e) {
               if (!player.queue.current) player.destroy();
-              return awaitchannel.send(
-                "❌ | **Вы ничего не выбрали**"
-              );
+              return awaitchannel.send("❌ | **Вы ничего не выбрали**");
             }
 
             const first = collected.first().content;
@@ -363,7 +362,7 @@ module.exports = {
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
               SongAddedEmbed.addField("Автор", track.author, true);
               SongAddedEmbed.addField(
-                "Продолжительность",
+                "Продолжительностью",
                 `\`${prettyMilliseconds(track.duration, {
                   colonNotation: true,
                 })}\``,

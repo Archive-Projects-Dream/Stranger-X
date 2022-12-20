@@ -2,13 +2,13 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "перемешать",
-  description: "Shuffles the queue",
+  description: "Перемешивает очередь",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["shuffle", "shuff"],
+  aliases: ["перемешай", "смешать", "смешай", "shuffle", "shuff"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client

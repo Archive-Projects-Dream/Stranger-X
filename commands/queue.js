@@ -35,7 +35,7 @@ module.exports = {
         )
         .addField("Поставил", `${player.queue.current.requester}`, true)
         .addField(
-          "Продолжительность",
+          "Продолжительностью",
           `${
             client.ProgressBar(
               player.position,
@@ -86,7 +86,7 @@ module.exports = {
         )
         .addField("Поставил:", `${player.queue.current.requester}`, true)
         .addField(
-          "Текущая продолжительность песни:",
+          "Текущая Продолжительностью песни:",
           `${
             client.ProgressBar(
               player.position,
@@ -144,7 +144,7 @@ module.exports = {
           )
           .addField("Поставил", `${player.queue.current.requester}`, true)
           .addField(
-            "Продолжительность",
+            "Продолжительностью",
             `${
               client.ProgressBar(
                 player.position,
@@ -198,7 +198,7 @@ module.exports = {
           )
           .addField("Поставил:", `${player.queue.current.requester}`, true)
           .addField(
-            "Текущая продолжительность песни:",
+            "Текущая Продолжительностью песни:",
             `${
               client.ProgressBar(
                 player.position,

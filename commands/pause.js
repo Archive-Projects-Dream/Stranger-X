@@ -2,14 +2,14 @@ const { MessageEmbed } = require("discord.js");
 const { TrackUtils } = require("erela.js");
 
 module.exports = {
-  name: "pause",
+  name: "пауза",
   description: "Приостанавливает музыку",
   usage: "",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: [],
+  aliases: ["тайм-аут", "таймаут", "приостанови", "пауз", "зфгыу"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -46,7 +46,9 @@ module.exports = {
     let embed = new MessageEmbed()
       .setAuthor(`На паузе!`, client.botconfig.IconURL)
       .setColor(client.botconfig.EmbedColor)
-      .setDescription(`Введите \`${GuildDB.prefix}resume\` чтобы продолжить воспроизведение!`);
+      .setDescription(
+        `Введите \`${GuildDB.prefix}resume\` чтобы продолжить воспроизведение!`
+      );
     await message.channel.send(embed);
     await message.react("✅");
   },

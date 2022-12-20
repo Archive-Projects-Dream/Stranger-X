@@ -10,7 +10,7 @@ module.exports = {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["p"],
+  aliases: ["играй", "запусти", "воспроизведи", "плей", "здфн", "п", "p"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -92,7 +92,7 @@ module.exports = {
             `\`${Searched.tracks.length}\` песен`,
             false
           );
-          //SongAddedEmbed.addField("Продолжительность плейлиста", `\`${prettyMilliseconds(Searched.tracks, { colonNotation: true })}\``, false)
+          //SongAddedEmbed.addField("Продолжительностью плейлиста", `\`${prettyMilliseconds(Searched.tracks, { colonNotation: true })}\``, false)
           Searching.edit(SongAddedEmbed);
         } else if (Searched.loadType.startsWith("TRACK")) {
           player.queue.add(
@@ -100,7 +100,10 @@ module.exports = {
           );
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
+          SongAddedEmbed.setAuthor(
+            `Добавлено в очередь`,
+            client.botconfig.IconURL
+          );
           SongAddedEmbed.setDescription(
             `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
           );
@@ -109,7 +112,7 @@ module.exports = {
             Searched.tracks[0].info.author,
             true
           );
-          //SongAddedEmbed.addField("Продолжительность", `\`${prettyMilliseconds(Searched.tracks[0].length, { colonNotation: true })}\``, true);
+          //SongAddedEmbed.addField("Продолжительностью", `\`${prettyMilliseconds(Searched.tracks[0].length, { colonNotation: true })}\``, true);
           if (player.queue.totalSize > 1)
             SongAddedEmbed.addField(
               "Позиция в очереди",
@@ -158,7 +161,7 @@ module.exports = {
             false
           );
           SongAddedEmbed.addField(
-            "Продолжительность плейлиста",
+            "Продолжительностью плейлиста",
             `\`${prettyMilliseconds(Searched.playlist.duration, {
               colonNotation: true,
             })}\``,
@@ -169,7 +172,10 @@ module.exports = {
           player.queue.add(Searched.tracks[0]);
           if (!player.playing && !player.paused && !player.queue.size)
             player.play();
-          SongAddedEmbed.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
+          SongAddedEmbed.setAuthor(
+            `Добавлено в очередь`,
+            client.botconfig.IconURL
+          );
 
           // SongAddedEmbed.setThumbnail(Searched.tracks[0].displayThumbnail());
           SongAddedEmbed.setDescription(
@@ -177,7 +183,7 @@ module.exports = {
           );
           SongAddedEmbed.addField("Автор", Searched.tracks[0].author, true);
           SongAddedEmbed.addField(
-            "Продолжительность",
+            "Продолжительностью",
             `\`${prettyMilliseconds(Searched.tracks[0].duration, {
               colonNotation: true,
             })}\``,
@@ -305,7 +311,10 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.length)
               player.play();
             let SongAdded = new MessageEmbed();
-            SongAdded.setAuthor(`Добавлено в очередь`, client.botconfig.IconURL);
+            SongAdded.setAuthor(
+              `Добавлено в очередь`,
+              client.botconfig.IconURL
+            );
             SongAdded.setColor(client.botconfig.EmbedColor);
             SongAdded.setDescription(
               `[${Searched.tracks[0].info.title}](${Searched.tracks[0].info.uri})`
@@ -384,7 +393,7 @@ module.exports = {
             );
             SongAddedEmbed.addField("Автор", res.tracks[0].author, true);
             SongAddedEmbed.addField(
-              "Продолжительность",
+              "Продолжительностью",
               `\`${prettyMilliseconds(res.tracks[0].duration, {
                 colonNotation: true,
               })}\``,
@@ -416,7 +425,7 @@ module.exports = {
               false
             );
             SongAdded.addField(
-              "Продолжительность плейлиста",
+              "Продолжительностью плейлиста",
               `\`${prettyMilliseconds(res.playlist.duration, {
                 colonNotation: true,
               })}\``,
@@ -438,7 +447,7 @@ module.exports = {
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
               SongAddedEmbed.addField("Автор", track.author, true);
               SongAddedEmbed.addField(
-                "Продолжительность",
+                "Продолжительностью",
                 `\`${prettyMilliseconds(track.duration, {
                   colonNotation: true,
                 })}\``,
@@ -463,7 +472,7 @@ module.exports = {
               SongAddedEmbed.setDescription(`[${track.title}](${track.uri})`);
               SongAddedEmbed.addField("Автор", track.author, true);
               SongAddedEmbed.addField(
-                "Продолжительность",
+                "Продолжительностью",
                 `\`${prettyMilliseconds(track.duration, {
                   colonNotation: true,
                 })}\``,

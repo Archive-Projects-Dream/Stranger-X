@@ -2,14 +2,14 @@ const { MessageEmbed } = require("discord.js");
 const { TrackUtils, Player } = require("erela.js");
 
 module.exports = {
-  name: "skipto",
+  name: "пропускдо",
   description: `Skip to a song in the queue`,
   usage: "<число>",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["st"],
+  aliases: ["до", "skipto", "st"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
